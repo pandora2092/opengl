@@ -1,0 +1,16 @@
+project glfw_project : source-location src : requirements <include>include : build-dir build : usage-requirements <include>include ;
+
+# echo [ glob *.c ] ;
+
+files = context.c init.c input.c monitor.c window.c vulkan.c
+        x11_init.c x11_monitor.c x11_window.c
+        xkb_unicode.c linux_joystick.c posix_time.c posix_tls.c
+        glx_context.c egl_context.c ;
+
+alias linux-X : [ lib X11 Xi Xrandr Xinerama Xcursor Xxf86vm ] : <link>shared ;
+alias linux : [ lib rt dl pthread ] : <link>shared ;
+
+lib glfw : $(files) linux linux-X :
+    <target-os>linux <include>src 
+    <warnings>off <define>_GLFW_HAS_XF86VM <define>_GLFW_X11 
+    <link>shared:<define>_GLFW_BUILD_DLL ;      

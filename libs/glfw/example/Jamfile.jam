@@ -1,0 +1,5 @@
+project example_glfw : source-location . : build-dir build ;
+
+exe example : main.cpp ..//glfw ;
+
+install example-install : example ..//glfw : <location>bin <dll-path>. ;
