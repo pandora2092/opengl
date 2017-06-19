@@ -1,0 +1,11 @@
+project first : source-location src : requirements <include>include : build-dir build ;
+
+# echo [ glob *.cpp ] ;
+
+lib GL ;
+
+exe main : [ glob *.cpp ] ../../libs/glfw//glfw GL ;
+
+install main-install : main ../../libs/glfw//glfw : <location>bin <dll-path>. ;
+
+# install main-install : main ../libs/lib_print//lib_print : <location>bin <dll-path>. ;
